@@ -1,0 +1,47 @@
+﻿@model IEnumerable<BartenderMVC.Models.Cocktail>
+
+@{
+    ViewData["Title"] = "Cocktail Menu";
+}
+
+<head>
+    <link rel="stylesheet" href="../wwwroot/css/site.css">
+</head>
+<h1>Cocktail Menu</h1>
+
+<form class="p-a-1" asp-action="Index" method="post" width="50%">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Price)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td>
+                        @*<input type="number" class="form-control-sm" asp-for="@item.Name" placeholder="Enter Quantity" />*@
+                        <input class="checkmark" type="radio" asp-for="@item.Name" id="@item.Name" name="cocktail" value="@item.Name">
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <input type="submit" value="Purchase"/>
+</form>
+<form class="p-a-1" asp-action="OrderQueue" method="get" width="50%">
+    <input type="submit" value="Bartender Queue">
+</form>

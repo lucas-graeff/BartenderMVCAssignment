@@ -1,0 +1,50 @@
+﻿@model IEnumerable<BartenderMVC.Models.Queue>
+
+@{
+    ViewData["Title"] = "Cocktail Queue";
+}
+
+<h1>Queue</h1>
+
+<form class="p-a-1" asp-action="OrderQueue" method="post" width="50%">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Order Number
+                </th>
+                <th>
+                    Drink
+                </th>
+                <th>
+                    Served?
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                if (item.Completed == false)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DrinkName)
+                        </td>
+                        <td>
+                            @*<input type="number" class="form-control-sm" asp-for="@item.Name" placeholder="Enter Quantity" />*@
+                            <input type="checkbox" asp-for="@item.Completed" id="@item.Id" name="orders" value="@item.Id" />
+                        </td>
+                    </tr>
+                }
+
+            }
+        </tbody>
+    </table>
+    <input type="submit" value="Update" />
+</form>
+<form class="p-a-1" asp-action="Home" method="get" width="50%">
+    <input type="submit" value="Home">
+</form>
